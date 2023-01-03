@@ -21,3 +21,17 @@ def init_layers(nn_architecture, seed = 99):
         params_values[f'b{str(layer_idx)}'] = (np.random.randn(layer_output_size, 1) * 0.1)
 
     return params_values
+def sigmoid(Z):
+    return 1/(1+np.exp(-Z))
+
+def relu(Z):
+    return np.maximum(0,Z)
+
+def sigmoid_backward(dA, Z):
+    sig = sigmoid(Z)
+    return dA * sig * (1 - sig)
+
+def relu_backward(dA, Z):
+    dZ = np.array(dA, copy = True)
+    dZ[Z <= 0] = 0;
+    return dZ;
