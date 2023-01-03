@@ -72,10 +72,7 @@ def get_cost_value(Y_hat, Y):
     return np.squeeze(cost)
 
 def convert_prob_into_class(probs):
-    probs_ = np.copy(probs)
-    probs_[probs_ > 0.5] = 1
-    probs_[probs_ <= 0.5] = 0
-    return probs_
+    return np.where(probs > 0.5, 1, 0)
 
 def get_accuracy_value(Y_hat, Y):
     Y_hat_ = convert_prob_into_class(Y_hat)
