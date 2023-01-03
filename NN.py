@@ -33,5 +33,17 @@ def sigmoid_backward(dA, Z):
 
 def relu_backward(dA, Z):
     dZ = np.array(dA, copy = True)
-    dZ[Z <= 0] = 0;
-    return dZ;
+    dZ[Z <= 0] = 0
+    return dZ
+
+def single_layer_forward_propagation(A_prev, W_curr, b_curr, activation="relu"):
+    Z_curr = np.dot(W_curr, A_prev) + b_curr
+    
+    if activation is "relu":
+        activation_func = relu
+    elif activation is "sigmoid":
+        activation_func = sigmoid
+    else:
+        raise Exception('Non-supported activation function')
+        
+    return activation_func(Z_curr), Z_curr
