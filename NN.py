@@ -200,7 +200,7 @@ if __name__ == '__main__':
     ]
     params_values, cost_history, accuracy_history = train(X, Y, nn_architecture, 10000, 0.001)
     Y_hat, _ = full_forward_propagation(X, params_values, nn_architecture)
-    Y_hat = convert_prob_into_class(Y_hat)
+    Y_hat = convert_prob_into_class(Y_hat).astype(int)
     print(Y_hat)
     print(Y)
     # print(cost_history)
