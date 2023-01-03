@@ -124,3 +124,20 @@ def update(params_values, grads_values, nn_architecture, learning_rate):
         params_values[f"b{str(layer_idx)}"] -= (learning_rate * grads_values[f"db{str(layer_idx)}"])
 
     return params_values
+
+def train(X, Y, nn_architecture, epochs, learning_rate):
+    params_values = init_layers(nn_architecture, 2)
+    cost_history = []
+    accuracy_history = []
+    
+    for _ in range(epochs):
+        Y_hat, cashe = full_forward_propagation(X, params_values, nn_architecture)
+        cost = get_cost_value(Y_hat, Y)
+        cost_history.append(cost)
+        accuracy = get_accuracy_value(Y_hat, Y)
+        accuracy_history.append(accuracy)
+        
+        grads_values = full_backward_propagation(Y_hat, Y, cashe, params_values, nn_architecture)
+        params_values = update(params_values, grads_values, nn_architecture, learning_rate)
+        
+    return params_values, cost_history, accuracy_history
