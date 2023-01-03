@@ -183,9 +183,10 @@ def train(X, Y, nn_architecture, epochs, learning_rate, verbose=False, callback=
 
 
 def load_data():
-    # create xor dataset
-    X = np.array([[0, -1], [-1, 0], [-1, -1], [0, 1], [1, 0], [1, 1]]).T
-    Y = np.array([[0, 0, 0, 1, 1, 1]])
+    # create dataset of 1000 samples where each sample is a vector of 2 values
+    X = np.random.rand(2, 1000) - 0.5
+    # if the sum of the values in the vector is greater than 1, then the label is 1, otherwise 0
+    Y = (np.sum(X, axis=0, keepdims=True)  > 0).astype(np.uint8)
     return X, Y
 
 
@@ -198,11 +199,13 @@ if __name__ == '__main__':
         {"input_dim": 6, "output_dim": 4, "activation": "relu"},
         {"input_dim": 4, "output_dim": 1, "activation": "sigmoid"},
     ]
-    params_values, cost_history, accuracy_history = train(X, Y, nn_architecture, 10000, 0.001)
+    params_values, cost_history, accuracy_history = train(X, Y, nn_architecture, 1000, 0.1)
     Y_hat, _ = full_forward_propagation(X, params_values, nn_architecture)
     Y_hat = convert_prob_into_class(Y_hat).astype(int)
-    print(Y_hat)
-    print(Y)
+    plt.hist(Y_hat)
+    plt.show()
+    plt.hist(Y)
+    plt.show()
     # print(cost_history)
     # print(accuracy_history)
     plt.title("Cost")
