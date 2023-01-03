@@ -117,3 +117,10 @@ def full_backward_propagation(Y_hat, Y, memory, params_values, nn_architecture):
         grads_values[f"db{str(layer_idx_curr)}"] = db_curr
 
     return grads_values
+
+def update(params_values, grads_values, nn_architecture, learning_rate):
+    for layer_idx, layer in enumerate(nn_architecture):
+        params_values[f"W{str(layer_idx)}"] -= (learning_rate * grads_values[f"dW{str(layer_idx)}"])
+        params_values[f"b{str(layer_idx)}"] -= (learning_rate * grads_values[f"db{str(layer_idx)}"])
+
+    return params_values
