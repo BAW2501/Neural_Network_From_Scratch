@@ -47,7 +47,7 @@ for _ in range(epochs):
 
 # Show results
 while True:
-    index = int(input("Enter a number (0 - 59999): "))
+    index = int(input(f"Enter a number (0 - {len(images) - 1}): "))
     img = images[index]
     shape = int(np.sqrt(n_features)), int(np.sqrt(n_features))
     plt.imshow(img.reshape(shape), cmap="Greys")

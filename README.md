@@ -4,7 +4,9 @@ This code is a simple implementation of a neural network with a single hidden la
 
 # Dependencies
 `data.py`: This module contains the get_mnist function, which is used to load the MNIST dataset.
+
 `numpy`: This library is used for numerical computing, including operations on arrays and matrices.
+
 `matplotlib`: This library is used to plot the images and their corresponding labels.
 # Model Structure
 The network consists of:
